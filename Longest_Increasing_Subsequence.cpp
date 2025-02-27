@@ -55,3 +55,46 @@ public:
         return rec(0, -1, nums, n);
     }
 };
+
+
+// Using FORM 2 (which directly doesn't give answer so we need to look at max in dp again
+
+class Solution {
+public:
+    int dp[2510];
+
+    int rec(int level, vector<int>& nums) {
+        if(level < 0) {
+            return 0;
+        }
+
+        if(dp[level] != INT_MIN)
+            return dp[level];
+
+        int ans = 1; // as this element can be taken alone
+
+        for(int prev_taken = 0; prev_taken < level; prev_taken++) {
+            if(nums[prev_taken] < nums[level]) {
+                ans = max(ans, 1 + rec(prev_taken, nums));
+            }
+        }
+
+        return dp[level] = ans;
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        // FORM 2 se solve
+        int n = nums.size();
+        for(int i = 0; i <= n+1; i++) {
+            dp[i] = INT_MIN;
+        }
+
+        int longest = 1;
+
+        for(int i = n-1; i >= 0; i--) {
+            longest = max(longest, rec(i, nums));
+        }
+
+        return longest;
+    }
+};
