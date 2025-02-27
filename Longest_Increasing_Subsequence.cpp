@@ -91,7 +91,7 @@ public:
 
         int longest = 1;
 
-        for(int i = n-1; i >= 0; i--) {
+        for(int i = 0; i < n; i++) {
             longest = max(longest, rec(i, nums));
         }
 
