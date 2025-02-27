@@ -1,3 +1,5 @@
+// Link https://maang.in/problems/Subset-Sum-Queries-760?resourceUrl=cs70-cp476-pl3255-rs760&returnUrl=%5B%22%2Fcourses%2FDP-Workshop-Vivek-Gupta-Youtube-70%3Ftab%3Dchapters%22%5D
+
 // Given an array of size N, and Q queries, for each query, you need to get the indices of the elements of the array whose subset-sum is equal to the queried sum i, if possible 1, else return -1.
 
 // Complete the Function subset_queries( vector &arr, vector &queries ) that takes vector a and queries vector as input.
