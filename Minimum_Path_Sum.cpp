@@ -20,13 +20,14 @@
 // 1 <= m, n <= 200
 // 0 <= grid[i][j] <= 200
 
+// FORM 2 ENDING AT
 
 class Solution {
 public:
 
     int dp[210][210];
 
-    int rec(int r, int c, vector<vector<int>>& grid) {
+    int rec(int r, int c, vector<vector<int>>& grid) { // Best min sum path ending at {r, c} starting at {0,0}
         //basecase
         if(r == 0 && c == 0){
             return grid[r][c];
