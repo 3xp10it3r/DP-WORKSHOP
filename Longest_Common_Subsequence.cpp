@@ -65,3 +65,41 @@ public:
         return rec(0, 0, text1, text2, n, m);
     }
 };
+
+
+// for 3 strings
+
+class Solution {
+public:
+
+    int dp[1010][1010][1010];
+    int rec(int i, int j, int k, string& text1, string& text2, string& text3 int n, int m, int x) {
+        // returns the LCS of text1[i...n-1] & text2[j....m-1] & text3[k..x-1];
+
+        if(i >= n || j >= m || k>=x) {
+            return 0;
+        }
+
+        if(dp[i][j][k] != -1)
+            return dp[i][j][k];
+
+        int ans = 0;
+
+        ans = max(ans, rec(i+1, j, k, text1, text2, text3, n, m, x));
+        ans = max(ans, rec(i, j+1, k, text1, text2, text3, n, m, x));
+        ans = max(ans, rec(i, j, k+1, text1, text2, text3, n, m, x));
+
+        if(text1[i] == text2[j] && text2[j] == text3[k]) {
+            ans = max(ans, 1 + rec(i+1, j+1, k+1, text1, text2, text3, n, m, x));
+        }
+        
+
+        return dp[i][j][k] = ans;
+    }
+
+    int longestCommonSubsequence(string text1, string text2, strint text3) {
+        int n = text1.size(), m = text2.size(), x = text3.size();
+        memset(dp, -1, sizeof(dp));
+        return rec(0, 0, 0, text1, text2, text3, n, m, x);
+    }
+};
