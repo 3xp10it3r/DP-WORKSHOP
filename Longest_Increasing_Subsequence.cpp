@@ -98,3 +98,76 @@ public:
         return longest;
     }
 };
+
+
+
+
+
+
+// NlogN
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> v(n);
+    vector<int> insertedAt(n);
+    
+    for(int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+    
+    vector<int> lis; // longest increasing subsq having last element with size i+1
+    
+    for(int i= 0; i < n; i++) {
+        if(lis.empty() || lis.back() < v[i]) {
+            lis.push_back(v[i]);
+            insertedAt[i] = lis.size();
+        } else {
+            auto it = lower_bound(lis.begin(), lis.end(), v[i]);
+            *it = v[i];
+            
+            insertedAt[i] = it - lis.begin() + 1;
+        }
+    }
+    
+    cout << lis.size() << endl; // this is the longest increasing subsq length
+    
+    // To Print the longest subsq
+    
+    vector<int> ans;
+    
+    int currLength = lis.size();
+    
+    for(int i = n-1; i >= 0; i--) {
+        if(insertedAt[i] == currLength) {
+            ans.push_back(v[i]);
+            currLength--;
+        }
+    }
+    
+    reverse(ans.begin(), ans.end());
+    
+    for(int i = 0; i < ans.size(); i++) {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
+
+
+
+// #input
+// 8
+// 10 9 2 5 3 7 101 18
+// #output
+// 4
+// 2 3 7 18
+
+
