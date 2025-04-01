@@ -103,3 +103,62 @@ public:
         return rec(0, 0, 0, text1, text2, text3, n, m, x);
     }
 };
+
+
+
+// Print Solution
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+string s, t;
+
+int dp[3001][3001];
+
+int rec(int i, int j, int n, int m) { // longest common subseq ending s at i and t at j s[0...i] t[0....j]
+    if(i >= n || j >= m) {
+        return 0;
+    }
+    
+    if(dp[i][j] != -1) return dp[i][j];
+    
+    int ans=0;
+    if(s[i] == t[j]) {
+        ans = max(ans, 1 + rec(i+1,j+1, n, m));
+    }
+    
+    ans = max(ans, rec(i, j+1, n, m));
+    ans = max(ans, rec(i+1, j, n, m));
+    
+    return dp[i][j] = ans;
+}
+string ans;
+
+void printSol(int i, int j, int n, int m) {
+    if(i==n || j == m) return;
+    
+    if(rec(i, j,n,m) == rec(i+1, j,n,m)) {
+        printSol(i+1, j,n,m);
+    } else if(rec(i,j,n,m) == rec(i, j+1,n,m)) {
+        printSol(i, j+1,n,m);
+    } else {
+        ans += s[i];
+        printSol(i+1, j+1, n, m);
+    }
+}
+
+int main() {
+    cin >> s >> t;
+    int n = s.size(), m = t.size();
+
+    memset(dp, -1, sizeof(dp));
+    
+    rec(0,0, n, m);
+    
+    printSol(0,0,n,m);
+    
+    cout << ans << endl;
+
+    return 0;
+}
