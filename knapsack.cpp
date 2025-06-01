@@ -34,7 +34,7 @@ Items with weights 3 and 5 give the maximum value (4 + 6 = 9) without exceeding 
 */
 
 
-
+// nice hai
 #include<bits/stdc++.h>
 
 using namespace std;
